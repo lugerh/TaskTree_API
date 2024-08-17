@@ -12,7 +12,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
     </a>
     <h1>TaskTree Backend</h1>
-    <h2>Test 7 </h2>
+    <h2>Test 8 </h2>
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
