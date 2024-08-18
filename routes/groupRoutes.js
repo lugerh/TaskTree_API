@@ -1,7 +1,7 @@
 // routes/groupRoutes.js
 import express from 'express';
-import Group from '../../../TaskTree/backend/models/Group.js';
-import AuthenticateToken from '../../../TaskTree/backend/middleware/authenticateToken.js';
+import Group from '../models/Group.js';
+import AuthenticateToken from '../middleware/authenticateToken.js';
 
 const router = express.Router();
 // Rutas para manejar proyectos
