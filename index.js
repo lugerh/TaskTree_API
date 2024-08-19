@@ -4,9 +4,10 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 
-import projectRoutes from './routes/projectRoutes.js';
-import groupRoutes from './routes/groupRoutes.js';
-import userRoutes from './routes/userRoutes.js';
+import projectRoutes from './routes/projectRoutes.js'
+import groupRoutes from './routes/groupRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+import createAdminUser from './adminSetup.js'
 
 const { connect, connection } = mongoose;
 const app = express();
@@ -16,8 +17,9 @@ connect(process.env.MONGO_URI);
 const db = connection;
 db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'));
 db.once('open', () => {
-  console.log('Conectado exitosamente a MongoDB');
-});
+  console.log('Conectado exitosamente a MongoDB')
+  createAdminUser()
+})
 
 // use cors para evitar errores con la resolucion del frontend react
 app.use(cors())
