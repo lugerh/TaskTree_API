@@ -3,7 +3,7 @@
   "module": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "bun run dev --host --port \"$PORT\" "
+    "dev": " --host --port \"$PORT\" "
   },
   "devDependencies": {
     "@types/bun": "latest",
