@@ -181,5 +181,8 @@ dist
 # bun
 bun.lockb
 
+#pnpm
+pnpm-lock.yaml
+
 # prettier
 .prettierrc
