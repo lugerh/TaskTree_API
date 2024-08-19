@@ -2,6 +2,9 @@
   "name": "tasktree_api",
   "module": "index.js",
   "type": "module",
+  "scripts": {
+    "dev": "bun run dev --host --port \"$PORT\" "
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "standard": "^17.1.0"
