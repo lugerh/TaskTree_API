@@ -180,3 +180,6 @@ dist
 
 # bun
 bun.lockb
+
+# prettier
+.prettierrc
