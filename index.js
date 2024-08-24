@@ -30,7 +30,7 @@ app.use(json())
 
 // Rutas
 app.get('/', (req, res) => {
-  res.send('TaskTree backend WORKING!')
+  res.send('TaskTree backend WORKING! 24/8/24 CODE BEERS !!')
 })
 
 app.use('/api', [projectRoutes, groupRoutes, userRoutes])
