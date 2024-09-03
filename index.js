@@ -14,6 +14,7 @@ const app = express()
 
 // Conexión a MongoDB
 connect(process.env.MONGO_URI)
+console.log("MOngo_URL", process.env.MONGO_URI)
 const db = connection
 db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'))
 db.once('open', () => {
