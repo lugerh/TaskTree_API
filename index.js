@@ -13,8 +13,8 @@ const { connect, connection } = mongoose
 const app = express()
 
 // Conexión a MongoDB
-connect(process.env.MONGO_URI)
-console.log("MOngo_URL", process.env.MONGO_URI)
+console.log("Mongo_URL", process.env.MONGO_URI)
+connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = connection
 db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'))
 db.once('open', () => {
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 app.use('/api', [projectRoutes, groupRoutes, userRoutes])
 
 const PORT = process.env.PORT || 8080
-// const PORT = 8080;
+
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto http://localhost:${PORT}`)
 })
