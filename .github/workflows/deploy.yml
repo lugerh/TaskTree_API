@@ -17,8 +17,6 @@ jobs:
           key: ${{ secrets.GHACTIONS_PRIVATE_KEY }}
           port: ${{ secrets.GHACTIONS_PORT }}
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh 
             cd ${{ secrets.GHACTIONS_WORK_DIR }} 
             git fetch 
             git checkout ${{ secrets.GHACTIONS_BRANCH }} 
