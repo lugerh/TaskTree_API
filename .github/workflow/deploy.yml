@@ -21,7 +21,7 @@ jobs:
             source ~/.nvm/nvm.sh 
             cd ${{ secrets.GHACTIONS_WORK_DIR }} 
             git fetch 
-            git checkout ${{ secrets.MAIN_BRANCH }} 
+            git checkout ${{ secrets.GHACTIONS_BRANCH }} 
             git pull 
             #// bun things
             exit
