@@ -12,7 +12,7 @@ jobs:
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.GHACTIONS_HOST }}
+          host: ${{ secrets.GHACTIONS_DEST_HOST }}
           username: ${{ secrets.GHACTIONS_USER }}
           key: ${{ secrets.GHACTIONS_PRIVATE_KEY }}
           port: ${{ secrets.GHACTIONS_PORT }}
