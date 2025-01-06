@@ -1,8 +1,9 @@
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
+
 jobs:
   run_pull:
     name: run pull
@@ -10,18 +11,19 @@ jobs:
 
     steps:
       - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v0.1.8
         with:
-          host: ${{ secrets.GHACTIONS_HOST }}
+          host: ${{ secrets.GHACTIONS_DEST_HOST }}
           username: ${{ secrets.GHACTIONS_USER }}
           key: ${{ secrets.GHACTIONS_PRIVATE_KEY }}
           port: ${{ secrets.GHACTIONS_PORT }}
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh 
-            cd ${{ secrets.GHACTIONS_WORK_DIR }} 
-            git fetch 
-            git checkout ${{ secrets.GHACTIONS_BRANCH }} 
-            git pull 
-            echo "HELLO"
-            exit
+            set -e  # Detener el script si ocurre un error
+            echo "Iniciando comandos remotos"
+            echo "Directorio de trabajo: ${{ secrets.GHACTIONS_WORK_DIR }}"
+            echo "Rama: ${{ secrets.GHACTIONS_BRANCH }}"
+            cd ${{ secrets.GHACTIONS_WORK_DIR }}
+            git fetch || { echo "Error: git fetch falló"; exit 1; }
+            git checkout ${{ secrets.GHACTIONS_BRANCH }} || { echo "Error: git checkout falló"; exit 1; }
+            git pull || { echo "Error: git pull falló"; exit 1; }
+            echo "Proceso completado con éxito"
