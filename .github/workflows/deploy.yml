@@ -13,11 +13,17 @@ jobs:
       - name: Debug variables
         run: |
           echo "Debugging variables:"
-          echo "Host: ${{ secrets.GHACTIONS_DEST_HOST }}"
-          echo "Username: ${{ secrets.GHACTIONS_USER }}"
-          echo "Port: ${{ secrets.GHACTIONS_PORT }}"
-          echo "Work Directory: ${{ secrets.GHACTIONS_WORK_DIR }}"
-          echo "Branch: ${{ secrets.GHACTIONS_BRANCH }}"
+          echo "Host: $GHACTIONS_DEST_HOST"
+          echo "Username: $GHACTIONS_USER"
+          echo "Port: $GHACTIONS_PORT"
+          echo "Work Directory: $GHACTIONS_WORK_DIR"
+          echo "Branch: $GHACTIONS_BRANCH"
+        env:
+          GHACTIONS_DEST_HOST: ${{ secrets.GHACTIONS_DEST_HOST }}
+          GHACTIONS_USER: ${{ secrets.GHACTIONS_USER }}
+          GHACTIONS_PORT: ${{ secrets.GHACTIONS_PORT }}
+          GHACTIONS_WORK_DIR: ${{ secrets.GHACTIONS_WORK_DIR }}
+          GHACTIONS_BRANCH: ${{ secrets.GHACTIONS_BRANCH }}
 
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.8
