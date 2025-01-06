@@ -10,21 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Debug variables
-        run: |
-          echo "Debugging variables:"
-          echo "Host: $GHACTIONS_DEST_HOST"
-          echo "Username: $GHACTIONS_USER"
-          echo "Port: $GHACTIONS_PORT"
-          echo "Work Directory: $GHACTIONS_WORK_DIR"
-          echo "Branch: $GHACTIONS_BRANCH"
-        env:
-          GHACTIONS_DEST_HOST: ${{ secrets.GHACTIONS_DEST_HOST }}
-          GHACTIONS_USER: ${{ secrets.GHACTIONS_USER }}
-          GHACTIONS_PORT: ${{ secrets.GHACTIONS_PORT }}
-          GHACTIONS_WORK_DIR: ${{ secrets.GHACTIONS_WORK_DIR }}
-          GHACTIONS_BRANCH: ${{ secrets.GHACTIONS_BRANCH }}
-
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.8
         with:
