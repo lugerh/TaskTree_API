@@ -34,7 +34,7 @@ jobs:
           script: |
             set -e
             cd ${{ secrets.GHACTIONS_WORK_DIR }}
-            cp /ruta/externa/.env .env
+            cp ../.env .env
             echo "Archivo .env copiado correctamente"
 
       - name: restart application with PM2
