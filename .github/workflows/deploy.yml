@@ -22,4 +22,5 @@ jobs:
             cd ${{ secrets.GHACTIONS_WORK_DIR }}
             git reset --hard
             git pull origin ${{ secrets.GHACTIONS_BRANCH }} || { echo "Error: git pull falló"; exit 1; }
+            pm2 restart backend || pm2 start bun --name backend -- run dev
             echo "Repositorio sincronizado correctamente"
