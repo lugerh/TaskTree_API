@@ -3,23 +3,36 @@ on:
     branches:
       - master
   workflow_dispatch:
+
 jobs:
   run_pull:
     name: run pull
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug variables
+        run: |
+          echo "Debugging variables:"
+          echo "Host: ${{ secrets.GHACTIONS_DEST_HOST }}"
+          echo "Username: ${{ secrets.GHACTIONS_USER }}"
+          echo "Port: ${{ secrets.GHACTIONS_PORT }}"
+          echo "Work Directory: ${{ secrets.GHACTIONS_WORK_DIR }}"
+          echo "Branch: ${{ secrets.GHACTIONS_BRANCH }}"
+
       - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.GHACTIONS_DEST_HOST }}
           username: ${{ secrets.GHACTIONS_USER }}
           key: ${{ secrets.GHACTIONS_PRIVATE_KEY }}
           port: ${{ secrets.GHACTIONS_PORT }}
           script: |
+            set -e  # Detener el script si ocurre un error
+            echo "Iniciando comandos remotos"
+            echo "Directorio de trabajo: ${{ secrets.GHACTIONS_WORK_DIR }}"
+            echo "Rama: ${{ secrets.GHACTIONS_BRANCH }}"
             cd ${{ secrets.GHACTIONS_WORK_DIR }} 
-            git fetch 
-            git checkout ${{ secrets.GHACTIONS_BRANCH }} 
-            git pull 
-            echo "HELLO W"
-            exit
+            git fetch || { echo "Error: git fetch falló"; exit 1; }
+            git checkout ${{ secrets.GHACTIONS_BRANCH }} || { echo "Error: git checkout falló"; exit 1; }
+            git pull || { echo "Error: git pull falló"; exit 1; }
+            echo "Proceso completado con éxito"
