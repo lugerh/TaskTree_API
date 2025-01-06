@@ -46,8 +46,8 @@ jobs:
           port: ${{ secrets.GHACTIONS_PORT }}
           script: |
             set -e
-            which pm2
+            pm2 -v
             export PATH="$PATH:$(npm config get prefix)/bin"
-            which pm2
+            pm2 -v
             pm2 restart backend || pm2 start bun --name backend -- run dev
             echo "Aplicación reiniciada correctamente"
