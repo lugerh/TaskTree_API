@@ -46,7 +46,9 @@ jobs:
           port: ${{ secrets.GHACTIONS_PORT }}
           script: |
             set -e
-            export PATH="$PATH:$(npm config get prefix)/bin"
+            export PATH="/home/ghdeploy/.nvm/versions/node/v22.12.0/bin:/home/ghdeploy/.local/share/pnpm:/home/ghdeploy/.bun/bin:$PATH"
+            export NVM_DIR=~/.nvm
+            source $NVM_DIR/nvm.sh
             pm2 -v
             pm2 restart backend || pm2 start bun --name backend -- run dev
             echo "Aplicación reiniciada correctamente"
