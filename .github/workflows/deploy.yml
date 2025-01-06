@@ -22,7 +22,7 @@ jobs:
             echo "Iniciando comandos remotos"
             echo "Directorio de trabajo: ${{ secrets.GHACTIONS_WORK_DIR }}"
             echo "Rama: ${{ secrets.GHACTIONS_BRANCH }}"
-            cd ${{ secrets.GHACTIONS_WORK_DIR }} 
+            cd ${{ secrets.GHACTIONS_WORK_DIR }}/TaskTree_API
             git fetch || { echo "Error: git fetch falló"; exit 1; }
             git checkout ${{ secrets.GHACTIONS_BRANCH }} || { echo "Error: git checkout falló"; exit 1; }
             git pull || { echo "Error: git pull falló"; exit 1; }
