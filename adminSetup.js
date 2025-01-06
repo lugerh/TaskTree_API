@@ -1,5 +1,5 @@
 import User from './models/User.js' // Asegúrate de tener la ruta correcta a tu modelo de usuario
-import bcrypt from 'bcrypt'
+import { Bun } from 'bun'
 
 // Función para crear un usuario administrador si no existe
 async function createAdminUser() {
@@ -8,9 +8,12 @@ async function createAdminUser() {
       username: process.env.BACKEND_ADMIN_USER,
     })
     if (!adminExists) {
-      const hashedPassword = await bcrypt.hash(
+      const hashedPassword = await Bun.password.hash(
         process.env.BACKEND_ADMIN_PASSWORD,
-        10
+        {
+          algorithm: 'bcrypt',
+          cost: 10, // Ajusta el coste según sea necesario
+        }
       )
       const adminUser = new User({
         username: process.env.BACKEND_ADMIN_USER,
