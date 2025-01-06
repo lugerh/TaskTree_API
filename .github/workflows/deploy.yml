@@ -22,6 +22,32 @@ jobs:
             cd ${{ secrets.GHACTIONS_WORK_DIR }}
             git reset --hard
             git pull origin ${{ secrets.GHACTIONS_BRANCH }} || { echo "Error: git pull falló"; exit 1; }
-            cp ../.env .env
-            pm2 restart backend || pm2 start bun --name backend -- run dev
             echo "Repositorio sincronizado correctamente"
+
+      - name: copy .env file
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.GHACTIONS_DEST_HOST }}
+          username: ${{ secrets.GHACTIONS_USER }}
+          key: ${{ secrets.GHACTIONS_PRIVATE_KEY }}
+          port: ${{ secrets.GHACTIONS_PORT }}
+          script: |
+            set -e
+            cd ${{ secrets.GHACTIONS_WORK_DIR }}
+            cp /ruta/externa/.env .env
+            echo "Archivo .env copiado correctamente"
+
+      - name: restart application with PM2
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.GHACTIONS_DEST_HOST }}
+          username: ${{ secrets.GHACTIONS_USER }}
+          key: ${{ secrets.GHACTIONS_PRIVATE_KEY }}
+          port: ${{ secrets.GHACTIONS_PORT }}
+          script: |
+            set -e
+            which pm2
+            export PATH="$PATH:$(npm config get prefix)/bin"
+            which pm2
+            pm2 restart backend || pm2 start bun --name backend -- run dev
+            echo "Aplicación reiniciada correctamente"
